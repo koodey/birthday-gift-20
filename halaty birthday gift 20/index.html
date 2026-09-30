@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title></title>
+    <meta name="description" content="" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Aref+Ruqaa+Ink:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="photo-background" id="photoBackground" aria-hidden="true">
+      <div class="photo-background-layer" id="backgroundLayerA"></div>
+      <div class="photo-background-layer" id="backgroundLayerB"></div>
+      <div class="photo-background-tint"></div>
+    </div>
+    <!-- خلفية النجوم والجزيئات -->
+    <div class="sky" aria-hidden="true">
+      <div class="stars" id="stars"></div>
+      <div class="particles" id="particles"></div>
+      <div class="glow-1"></div>
+      <div class="glow-2"></div>
+    </div>
+
+    <!-- مؤشر الفصول -->
+    <div class="progress" id="progress" aria-hidden="true"></div>
+
+    <!-- تحكم الموسيقى -->
+    <div class="music-control" id="musicControl" hidden>
+      <button type="button" id="musicToggle" class="mc-btn"></button>
+      <button type="button" id="muteToggle" class="mc-btn"></button>
+    </div>
+
+    <main id="app">
+      <!-- ========== المشهد 1: البداية ========== -->
+      <section class="scene scene-open active" id="scene-1">
+        <div class="scene-inner center">
+          <p class="kicker" id="openingTitle"></p>
+          <p class="lead" id="openingMessage"></p>
+          <div class="giftbox opening-gift" id="giftbox" aria-hidden="true">
+            <div class="gift-lid"></div>
+            <div class="gift-body"><span class="gift-ribbon"></span></div>
+            <div class="gift-light"></div>
+          </div>
+          <button type="button" class="btn btn-primary btn-lg" id="openGiftBtn"></button>
+        </div>
+      </section>
+
+      <!-- ========== المشهد 2: رسالة عيد الميلاد ========== -->
+      <section class="scene" id="scene-2">
+        <div class="scene-inner center">
+          <h1 class="display" id="birthdayTitle"></h1>
+          <div class="photo-frame zoomed">
+            <img id="introImage" alt="" loading="lazy" />
+          </div>
+          <p class="body-text typewriter" id="birthdayMessage"></p>
+          <div class="nav-row">
+            <button type="button" class="btn btn-back" data-prev>→</button>
+            <button type="button" class="btn btn-primary" data-next></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== المشهد 3: قصتنا ========== -->
+      <section class="scene" id="scene-3">
+        <div class="scene-inner">
+          <h2 class="title" id="timelineTitle"></h2>
+          <div class="timeline" id="timeline"></div>
+          <div class="nav-row">
+            <button type="button" class="btn btn-back" data-prev>→</button>
+            <button type="button" class="btn btn-primary" data-next></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== المشهد 5: المسافة ========== -->
+      <section class="scene" id="scene-5">
+        <div class="scene-inner center">
+          <h2 class="title" id="distanceTitle"></h2>
+          <div class="map-wrap">
+            <svg viewBox="0 0 600 300" class="map" role="img">
+              <defs>
+                <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="var(--gold)" />
+                  <stop offset="100%" stop-color="var(--rose)" />
+                </linearGradient>
+              </defs>
+              <g class="continents">
+                <!-- سوريا -->
+                <polygon points="44.4,80.4 55.2,55.2 73.2,48 84,53.4 127.2,44.4 163.2,51.6 220.8,37.2 276.6,37.2 260.4,58.8 242.4,76.8 235.2,123.6 224.4,134.4 148.8,170.4 76.8,210 40.8,195.6 44.4,174 69.6,156 62.4,127.2 44.4,127.2" />
+                <!-- الكويت -->
+                <polygon points="400,176 452,104 492,96 516,104 532,140 512,156 524,184 549.6,221.6 492,221.6 472,184.8" />
+                <text class="country-name" x="150" y="110"></text>
+                <text class="country-name" x="475" y="255"></text>
+              </g>
+              <path id="linkPath" class="link-path" d="M 59 167 Q 280 10 500 160" />
+              <circle class="pin pin-a" cx="59" cy="167" r="7" />
+              <circle class="pin pin-b" cx="500" cy="160" r="7" />
+              <circle class="spark" r="4">
+                <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#linkPath" />
+                </animateMotion>
+              </circle>
+            </svg>
+            <span class="map-label label-a" id="myLocation"></span>
+            <span class="map-label label-b" id="herLocation"></span>
+          </div>
+          <p class="body-text" id="distanceMessage"></p>
+          <p class="script-line" id="distanceMessage2"></p>
+          <div class="nav-row">
+            <button type="button" class="btn btn-back" data-prev>→</button>
+            <button type="button" class="btn btn-primary" data-next></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== المشهد 4: 20 سبب ========== -->
+      <section class="scene" id="scene-4">
+        <div class="scene-inner">
+          <h2 class="title" id="reasonsTitle"></h2>
+          <p class="hint"></p>
+          <div class="cards" id="reasonsGrid"></div>
+          <div class="reasons-ending" id="reasonsEnding" hidden>
+            <p class="script-line" id="reasonsEnd1"></p>
+            <p class="script-line big" id="reasonsEnd2"></p>
+          </div>
+          <div class="nav-row">
+            <button type="button" class="btn btn-back" data-prev>→</button>
+            <button type="button" class="btn btn-primary" data-next></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== المشهد: بالونات الأمنيات ========== -->
+      <section class="scene" id="scene-wish">
+        <div class="scene-inner center">
+          <h2 class="title" id="wishesTitle"></h2>
+          <p class="hint" id="wishesHint"></p>
+          <p class="wishes-count" id="wishesCount" aria-live="polite"></p>
+          <div class="wishes-stage" id="wishesStage"></div>
+          <div class="reasons-ending" id="wishesEnding" hidden>
+            <p class="script-line" id="wishesEnd1"></p>
+            <p class="script-line big" id="wishesEnd2"></p>
+          </div>
+          <div class="nav-row">
+            <button type="button" class="btn btn-back" data-prev>→</button>
+            <button type="button" class="btn btn-primary" data-next></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== المشهد 8: الرسالة الصوتية ========== -->
+      <section class="scene" id="scene-8">
+        <div class="scene-inner center">
+          <h2 class="title" id="voiceTitle"></h2>
+          <p class="hint" id="voiceSubtitle"></p>
+          <div class="player glass">
+            <button type="button" class="play-btn" id="voicePlay">▶</button>
+            <div class="bar" id="voiceBar"><span id="voiceFill"></span></div>
+            <span class="time" id="voiceTime">0:00</span>
+          </div>
+          <div class="nav-row">
+            <button type="button" class="btn btn-back" data-prev>→</button>
+            <button type="button" class="btn btn-primary" data-next></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== المشهد 9: علبة الهدية ========== -->
+      <section class="scene" id="scene-9">
+        <div class="scene-inner center">
+          <p class="kicker" id="giftTeaser"></p>
+          <div class="final-message" id="finalBlock">
+            <h2 class="display" id="finalGreeting"></h2>
+            <p class="body-text" id="finalMessage"></p>
+            <p class="signature" id="finalSignature"></p>
+            <p class="secret-invitation" id="secretInvitation"></p>
+            <div class="rating glass" id="ratingBox">
+              <h3 class="rating-title" id="ratingTitle"></h3>
+              <div id="ratingForm">
+                <p class="hint" id="ratingQuestion"></p>
+                <div class="rating-face" id="ratingFace" aria-hidden="true">🤔</div>
+                <div class="rating-hearts" id="ratingStars"></div>
+                <p class="rating-label" id="ratingLabel" aria-live="polite"></p>
+                <textarea id="ratingComment" rows="2" maxlength="300"></textarea>
+                <button type="button" class="btn btn-primary" id="ratingSubmit" disabled></button>
+              </div>
+              <div id="ratingSaved" hidden>
+                <div class="rating-saved-hearts" id="ratingSavedHearts"></div>
+                <p class="body-text" id="ratingSavedText"></p>
+                <p class="rating-saved-comment" id="ratingSavedComment"></p>
+                <p class="rating-date" id="ratingSavedDate"></p>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary restart-btn" id="restartBtn"></button>
+            <!-- الزر السري: قرد صغير مختبئ يطلّ من زاوية الرسالة -->
+            <button type="button" class="secret-peek" id="secretBtn"><span class="peek-face">🙈</span><span class="peek-bubble"></span></button>
+          </div>
+          <div class="secret-overlay" id="secretLock" hidden>
+            <div class="secret-card">
+              <div class="secret-emoji">🔐</div>
+              <h3 class="display"></h3>
+              <p class="body-text"></p>
+              <input type="password" id="secretInput" inputmode="numeric" maxlength="12" autocomplete="off">
+              <p class="secret-hint" id="secretHint"></p>
+              <div class="secret-actions">
+                <button type="button" class="btn btn-primary" id="secretSubmit"></button>
+                <button type="button" class="btn btn-back" id="secretClose">✕</button>
+              </div>
+            </div>
+          </div>
+          <div class="secret-overlay" id="secretRoom" hidden>
+            <div class="secret-card wide">
+              <h3 class="display"></h3>
+              <video id="secretVideo" controls playsinline preload="none"></video>
+              <p class="secret-hint" id="secretMissing" hidden></p>
+              <button type="button" class="btn btn-back" id="secretRoomClose">✕</button>
+            </div>
+          </div>
+          <div class="nav-row">
+            <button type="button" class="btn btn-back" data-prev>→</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <audio id="bgMusic" loop preload="none"></audio>
+    <audio id="voiceAudio" preload="none"></audio>
+
+    <script src="content.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
